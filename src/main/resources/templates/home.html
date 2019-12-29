@@ -1,0 +1,44 @@
+    <#assign page = "Home Page">
+    <#include "/common/header.html">
+
+    <div class="container">
+        <div class="row alert alert-primary" role="alert">
+            <div class="col-8">
+                Task Manager
+            </div>
+            <div class="col-4">
+                Created by <a href="http://www.github.com/fluffycorleone" class="alert-link">Fluffy </a>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <form action="/api/tasks/new" method="post">
+                    <h4>Enter New Task </h4>
+                    <h6>Title:</h6>
+                    <input type="text" name="field_title"><br>
+
+                    <h6>Description:</h6>
+                    <textarea rows="4" cols="50" name="field_desc">
+                    </textarea><br>
+
+                    <input type="submit" value="Submit" class="btn btn-light">
+                </form>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <#list todos as todo>
+            <div class="col-4">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">${todo.title}</h4>
+                    <button type="button" class="close" data-dismiss="alert" name="${todo.id}" onclick="deleteTask(this)" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <hr>
+                    <p class="mb-0">${todo.desc}</p>
+                </div>
+            </div>
+            </#list>
+        </div>
+    </div>
+
+    <#include "/common/footer.html">
